@@ -16,8 +16,6 @@ class AbstractCommandHandlerTest extends TestCase
      * Test that command message will be handler by the correct method.
      *
      * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::handle()
-     * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::getMethod()
-     * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::getPrefix()
      * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::getMetaData()
      * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::getAggregateId()
      */
