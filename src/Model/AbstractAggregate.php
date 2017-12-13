@@ -32,11 +32,11 @@ abstract class AbstractAggregate implements AggregateInterface
     protected $version;
 
     /**
-     * Command message meta data.
+     * Command message.
      *
-     * @var array
+     * @var CommandMessageInterface
      */
-    protected $metaData;
+    protected $commandMessage;
 
     /**
      * AbstractAggregate constructor.
@@ -71,18 +71,18 @@ abstract class AbstractAggregate implements AggregateInterface
      */
     public function handle(CommandMessageInterface $commandMessage): void
     {
-        $this->metaData = $commandMessage->getMetaData();
+        $this->commandMessage = $commandMessage;
 
         $this->getMethod($commandMessage)($commandMessage->getPayload());
     }
 
     /**
-     * Get command message meta data.
+     * Get command message.
      *
-     * @return array
+     * @return CommandMessageInterface
      */
-    protected function getMetaData(): array
+    public function getCommandMessage(): CommandMessageInterface
     {
-        return $this->metaData;
+        return $this->commandMessage;
     }
 }

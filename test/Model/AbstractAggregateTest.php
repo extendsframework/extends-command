@@ -34,7 +34,7 @@ class AbstractAggregateTest extends TestCase
      *
      * @covers \ExtendsFramework\Command\Model\AbstractAggregate::__construct()
      * @covers \ExtendsFramework\Command\Model\AbstractAggregate::handle()
-     * @covers \ExtendsFramework\Command\Model\AbstractAggregate::getMetaData()
+     * @covers \ExtendsFramework\Command\Model\AbstractAggregate::getCommandMessage()
      */
     public function testHandle(): void
     {
@@ -65,7 +65,7 @@ class AbstractAggregateTest extends TestCase
         $aggregate->handle($message);
 
         $this->assertSame($payload, $aggregate->getPayload());
-        $this->assertSame(['foo' => 'bar'], $aggregate->getMetaData());
+        $this->assertSame($message, $aggregate->getCommandMessage());
     }
 }
 
@@ -85,11 +85,11 @@ class AggregateStub extends AbstractAggregate
     }
 
     /**
-     * @return array
+     * @return CommandMessageInterface
      */
-    public function getMetaData(): array
+    public function getCommandMessage(): CommandMessageInterface
     {
-        return parent::getMetaData();
+        return parent::getCommandMessage();
     }
 
     /**

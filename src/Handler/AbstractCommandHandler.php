@@ -18,47 +18,29 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
     protected $prefix = 'handle';
 
     /**
-     * Aggregate id.
+     * Command message.
      *
-     * @var string
+     * @var CommandMessageInterface
      */
-    protected $aggregateId;
-
-    /**
-     * Meta data.
-     *
-     * @var array
-     */
-    protected $metaData;
+    protected $commandMessage;
 
     /**
      * @inheritDoc
      */
     public function handle(CommandMessageInterface $commandMessage): void
     {
-        $this->aggregateId = $commandMessage->getAggregateId();
-        $this->metaData = $commandMessage->getMetaData();
+        $this->commandMessage = $commandMessage;
 
         $this->getMethod($commandMessage)($commandMessage->getPayload());
     }
 
     /**
-     * Get aggregate id.
+     * Get command message.
      *
-     * @return string
+     * @return CommandMessageInterface
      */
-    protected function getAggregateId(): string
+    public function getCommandMessage(): CommandMessageInterface
     {
-        return $this->aggregateId;
-    }
-
-    /**
-     * Get meta data.
-     *
-     * @return array
-     */
-    protected function getMetaData(): array
-    {
-        return $this->metaData;
+        return $this->commandMessage;
     }
 }

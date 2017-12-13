@@ -16,8 +16,7 @@ class AbstractCommandHandlerTest extends TestCase
      * Test that command message will be handler by the correct method.
      *
      * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::handle()
-     * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::getMetaData()
-     * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::getAggregateId()
+     * @covers \ExtendsFramework\Command\Handler\AbstractCommandHandler::getCommandMessage()
      */
     public function testDispatch(): void
     {
@@ -28,32 +27,23 @@ class AbstractCommandHandlerTest extends TestCase
             ->method('getName')
             ->willReturn('PayloadStub');
 
-        $commandMessage = $this->createMock(CommandMessageInterface::class);
-        $commandMessage
+        $message = $this->createMock(CommandMessageInterface::class);
+        $message
             ->method('getPayload')
             ->willReturn($payload);
 
-        $commandMessage
+        $message
             ->method('getPayloadType')
             ->willReturn($payloadType);
 
-        $commandMessage
-            ->method('getMetaData')
-            ->willReturn(['foo' => 'bar']);
-
-        $commandMessage
-            ->method('getAggregateId')
-            ->willReturn('foo');
-
         /**
-         * @var CommandMessageInterface $commandMessage
+         * @var CommandMessageInterface $message
          */
-        $listener = new HandlerStub();
-        $listener->handle($commandMessage);
+        $handler = new HandlerStub();
+        $handler->handle($message);
 
-        $this->assertSame($payload, $listener->getPayload());
-        $this->assertSame('foo', $listener->getAggregateId());
-        $this->assertSame(['foo' => 'bar'], $listener->getMetaData());
+        $this->assertSame($payload, $handler->getPayload());
+        $this->assertSame($message, $handler->getCommandMessage());
     }
 }
 
@@ -73,19 +63,11 @@ class HandlerStub extends AbstractCommandHandler
     }
 
     /**
-     * @return array
+     * @return CommandMessageInterface
      */
-    public function getMetaData(): array
+    public function getCommandMessage(): CommandMessageInterface
     {
-        return parent::getMetaData();
-    }
-
-    /**
-     * @return string
-     */
-    public function getAggregateId(): string
-    {
-        return parent::getAggregateId();
+        return parent::getCommandMessage();
     }
 
     /**
