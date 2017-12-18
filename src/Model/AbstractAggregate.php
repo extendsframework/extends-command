@@ -74,7 +74,7 @@ abstract class AbstractAggregate implements AggregateInterface
      *
      * @return CommandMessageInterface
      */
-    public function getCommandMessage(): CommandMessageInterface
+    protected function getCommandMessage(): CommandMessageInterface
     {
         return $this->commandMessage;
     }
