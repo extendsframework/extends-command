@@ -11,13 +11,6 @@ abstract class AbstractAggregate implements AggregateInterface
     use PayloadMethodTrait;
 
     /**
-     * Method prefix;
-     *
-     * @var string
-     */
-    protected $prefix = 'handle';
-
-    /**
      * Unique identifier.
      *
      * @var string
@@ -73,7 +66,7 @@ abstract class AbstractAggregate implements AggregateInterface
     {
         $this->commandMessage = $commandMessage;
 
-        $this->getMethod($commandMessage)($commandMessage->getPayload());
+        $this->getMethod($commandMessage, 'handle')($commandMessage->getPayload());
     }
 
     /**

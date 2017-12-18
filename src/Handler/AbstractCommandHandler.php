@@ -11,13 +11,6 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
     use PayloadMethodTrait;
 
     /**
-     * Method prefix.
-     *
-     * @var string
-     */
-    protected $prefix = 'handle';
-
-    /**
      * Command message.
      *
      * @var CommandMessageInterface
@@ -31,7 +24,7 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
     {
         $this->commandMessage = $commandMessage;
 
-        $this->getMethod($commandMessage)($commandMessage->getPayload());
+        $this->getMethod($commandMessage, 'handle')($commandMessage->getPayload());
     }
 
     /**
