@@ -33,8 +33,6 @@ class AbstractAggregateTest extends TestCase
      * Test that correct method will be called.
      *
      * @covers \ExtendsFramework\Command\Model\AbstractAggregate::__construct()
-     * @covers \ExtendsFramework\Command\Model\AbstractAggregate::handle()
-     * @covers \ExtendsFramework\Command\Model\AbstractAggregate::getCommandMessage()
      */
     public function testHandle(): void
     {
