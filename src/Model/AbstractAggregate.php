@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace ExtendsFramework\Command\Model;
 
-use ExtendsFramework\Command\CommandMessageInterface;
 use ExtendsFramework\Command\Handler\AbstractCommandHandler;
 use ExtendsFramework\Message\Payload\PayloadMethodTrait;
 
@@ -24,13 +23,6 @@ abstract class AbstractAggregate extends AbstractCommandHandler implements Aggre
      * @var int
      */
     protected $version;
-
-    /**
-     * Command message.
-     *
-     * @var CommandMessageInterface
-     */
-    protected $commandMessage;
 
     /**
      * AbstractAggregate constructor.
