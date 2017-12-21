@@ -42,9 +42,10 @@ class AggregateCommandHandler implements CommandHandlerInterface
      */
     public function handle(CommandMessageInterface $commandMessage): void
     {
-        $this
-            ->getAggregate($commandMessage)
-            ->handle($commandMessage);
+        $aggregate = $this->getAggregate($commandMessage);
+        $aggregate->handle($commandMessage);
+
+        $this->saveAggregate($aggregate);
     }
 
     /**
@@ -81,6 +82,18 @@ class AggregateCommandHandler implements CommandHandlerInterface
         return $this
             ->getRepository()
             ->load($commandMessage->getAggregateId());
+    }
+
+    /**
+     * Save aggregate to repository.
+     *
+     * @param AggregateInterface $aggregate
+     */
+    protected function saveAggregate(AggregateInterface $aggregate): void
+    {
+        $this
+            ->getRepository()
+            ->save($aggregate);
     }
 
     /**

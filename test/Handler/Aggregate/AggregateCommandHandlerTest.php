@@ -20,8 +20,9 @@ class AggregateCommandHandlerTest extends TestCase
      * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::__construct()
      * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::addAggregate()
      * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::handle()
-     * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::getAggregate()
      * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::getRepository()
+     * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::getAggregate()
+     * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::saveAggregate()
      */
     public function testHandle(): void
     {
@@ -52,6 +53,11 @@ class AggregateCommandHandlerTest extends TestCase
             ->with('09c3a960-de5e-4cb7-a0be-a6bfc73ee65c')
             ->willReturn($aggregate);
 
+        $repository
+            ->expects($this->once())
+            ->method('save')
+            ->with($aggregate);
+
         /**
          * @var RepositoryInterface     $repository
          * @var CommandMessageInterface $commandMessage
@@ -72,7 +78,7 @@ class AggregateCommandHandlerTest extends TestCase
      * @covers                   \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::getAggregate()
      * @covers                   \ExtendsFramework\Command\Handler\Aggregate\Exception\AggregateClassNameNotFound::__construct()
      * @expectedException        \ExtendsFramework\Command\Handler\Aggregate\Exception\AggregateClassNameNotFound
-     * @expectedExceptionMessage No aggregate class name found for payload name "FooBar".
+     * @expectedExceptionMessage No aggregate found for payload name "FooBar".
      */
     public function testAggregateClassNameNotFound(): void
     {
