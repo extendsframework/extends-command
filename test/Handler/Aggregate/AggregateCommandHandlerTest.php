@@ -18,10 +18,9 @@ class AggregateCommandHandlerTest extends TestCase
      * aggregate.
      *
      * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::__construct()
-     * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::addAggregate()
      * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::handle()
      * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::getRepository()
-     * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::getAggregate()
+     * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::loadAggregate()
      * @covers \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::saveAggregate()
      */
     public function testHandle(): void
@@ -57,42 +56,6 @@ class AggregateCommandHandlerTest extends TestCase
             ->expects($this->once())
             ->method('save')
             ->with($aggregate);
-
-        /**
-         * @var RepositoryInterface     $repository
-         * @var CommandMessageInterface $commandMessage
-         */
-        $handler = new AggregateCommandHandler($repository);
-        $handler
-            ->addAggregate('AggregateClassName', 'FooBar')
-            ->handle($commandMessage);
-    }
-
-    /**
-     * Aggregate class name not found.
-     *
-     * Test that an exception will be thrown.
-     *
-     * @covers                   \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::__construct()
-     * @covers                   \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::handle()
-     * @covers                   \ExtendsFramework\Command\Handler\Aggregate\AggregateCommandHandler::getAggregate()
-     * @covers                   \ExtendsFramework\Command\Handler\Aggregate\Exception\AggregateClassNameNotFound::__construct()
-     * @expectedException        \ExtendsFramework\Command\Handler\Aggregate\Exception\AggregateClassNameNotFound
-     * @expectedExceptionMessage No aggregate found for payload name "FooBar".
-     */
-    public function testAggregateClassNameNotFound(): void
-    {
-        $payloadType = $this->createMock(PayloadTypeInterface::class);
-        $payloadType
-            ->method('getName')
-            ->willReturn('FooBar');
-
-        $commandMessage = $this->createMock(CommandMessageInterface::class);
-        $commandMessage
-            ->method('getPayloadType')
-            ->willReturn($payloadType);
-
-        $repository = $this->createMock(RepositoryInterface::class);
 
         /**
          * @var RepositoryInterface     $repository
