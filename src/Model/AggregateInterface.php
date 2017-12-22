@@ -3,18 +3,10 @@ declare(strict_types=1);
 
 namespace ExtendsFramework\Command\Model;
 
-use ExtendsFramework\Command\CommandMessageInterface;
+use ExtendsFramework\Command\Handler\CommandHandlerInterface;
 
-interface AggregateInterface
+interface AggregateInterface extends CommandHandlerInterface
 {
-    /**
-     * Handle command message.
-     *
-     * @param CommandMessageInterface $commandMessage
-     * @return void
-     */
-    public function handle(CommandMessageInterface $commandMessage): void;
-
     /**
      * Get identifier.
      *
