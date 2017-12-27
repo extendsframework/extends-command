@@ -15,7 +15,7 @@ class CommandDispatcherFactory implements ServiceFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createService(string $key, ServiceLocatorInterface $serviceLocator, array $extra = null): CommandDispatcherInterface
+    public function createService(string $key, ServiceLocatorInterface $serviceLocator, array $extra = null): object
     {
         $config = $serviceLocator->getConfig();
         $config = $config[CommandDispatcherInterface::class] ?? [];
@@ -40,7 +40,7 @@ class CommandDispatcherFactory implements ServiceFactoryInterface
      * @return CommandHandlerInterface
      * @throws ServiceLocatorException
      */
-    protected function getCommandHandler(ServiceLocatorInterface $serviceLocator, string $key): CommandHandlerInterface
+    protected function getCommandHandler(ServiceLocatorInterface $serviceLocator, string $key): object
     {
         return $serviceLocator->getService($key);
     }
