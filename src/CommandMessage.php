@@ -24,8 +24,12 @@ class CommandMessage extends Message implements CommandMessageInterface
      * @param string               $aggregateId
      * @param array                $metaData
      */
-    public function __construct(PayloadInterface $payload, PayloadTypeInterface $payloadType, string $aggregateId, array $metaData)
-    {
+    public function __construct(
+        PayloadInterface $payload,
+        PayloadTypeInterface $payloadType,
+        string $aggregateId,
+        array $metaData
+    ) {
         parent::__construct($payload, $payloadType, $metaData);
 
         $this->aggregateId = $aggregateId;
