@@ -52,10 +52,21 @@ class CommandDispatcher implements CommandDispatcherInterface
     protected function getCommandHandler(CommandMessageInterface $commandMessage): CommandHandlerInterface
     {
         $name = $commandMessage->getPayloadType()->getName();
-        if (array_key_exists($name, $this->commandHandlers) === false) {
+        $commandHandlers = $this->getCommandHandlers();
+        if (array_key_exists($name, $commandHandlers) === false) {
             throw new CommandHandlerNotFound($commandMessage);
         }
 
-        return $this->commandHandlers[$name];
+        return $commandHandlers[$name];
+    }
+
+    /**
+     * Get command handlers.
+     *
+     * @return CommandHandlerInterface[]
+     */
+    protected function getCommandHandlers(): array
+    {
+        return $this->commandHandlers;
     }
 }
