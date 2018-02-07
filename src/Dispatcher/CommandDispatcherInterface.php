@@ -10,7 +10,7 @@ interface CommandDispatcherInterface
     /**
      * Dispatch command message to handler.
      *
-     * Command message can only be dispatched to one handler. And exception will be thrown when a handler for the
+     * Command message can only be dispatched to one handler. An exception will be thrown when a handler for the
      * command message can not be found.
      *
      * @param CommandMessageInterface $commandMessage
