@@ -32,7 +32,7 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
      *
      * @return CommandMessageInterface
      */
-    public function getCommandMessage(): CommandMessageInterface
+    protected function getCommandMessage(): CommandMessageInterface
     {
         return $this->commandMessage;
     }
