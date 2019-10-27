@@ -14,7 +14,7 @@ trait CommandDispatcherAware
      *
      * @var CommandDispatcherInterface
      */
-    protected $commandDispatcher;
+    private $commandDispatcher;
 
     /**
      * Dispatch new command message.
@@ -24,7 +24,7 @@ trait CommandDispatcherAware
      * @param array|null       $metaData
      * @throws CommandDispatcherException
      */
-    protected function dispatch(string $aggregateId, PayloadInterface $payload, array $metaData = null): void
+    private function dispatch(string $aggregateId, PayloadInterface $payload, array $metaData = null): void
     {
         $this
             ->getCommandDispatcher()
@@ -43,7 +43,7 @@ trait CommandDispatcherAware
      *
      * @return CommandDispatcherInterface
      */
-    protected function getCommandDispatcher(): CommandDispatcherInterface
+    private function getCommandDispatcher(): CommandDispatcherInterface
     {
         return $this->commandDispatcher;
     }

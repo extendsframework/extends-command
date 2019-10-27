@@ -14,7 +14,7 @@ class CommandDispatcher implements CommandDispatcherInterface
      *
      * @var CommandHandlerInterface[]
      */
-    protected $commandHandlers = [];
+    private $commandHandlers = [];
 
     /**
      * @inheritDoc
@@ -49,11 +49,13 @@ class CommandDispatcher implements CommandDispatcherInterface
      * @return CommandHandlerInterface
      * @throws CommandDispatcherException
      */
-    protected function getCommandHandler(CommandMessageInterface $commandMessage): CommandHandlerInterface
+    private function getCommandHandler(CommandMessageInterface $commandMessage): CommandHandlerInterface
     {
-        $name = $commandMessage->getPayloadType()->getName();
+        $name = $commandMessage
+            ->getPayloadType()
+            ->getName();
         $commandHandlers = $this->getCommandHandlers();
-        if (array_key_exists($name, $commandHandlers) === false) {
+        if (!array_key_exists($name, $commandHandlers)) {
             throw new CommandHandlerNotFound($commandMessage);
         }
 
@@ -65,7 +67,7 @@ class CommandDispatcher implements CommandDispatcherInterface
      *
      * @return CommandHandlerInterface[]
      */
-    protected function getCommandHandlers(): array
+    private function getCommandHandlers(): array
     {
         return $this->commandHandlers;
     }

@@ -15,7 +15,7 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
      *
      * @var CommandMessageInterface
      */
-    protected $commandMessage;
+    private $commandMessage;
 
     /**
      * @inheritDoc

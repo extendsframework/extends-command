@@ -14,7 +14,7 @@ class CommandMessage extends Message implements CommandMessageInterface
      *
      * @var string
      */
-    protected $aggregateId;
+    private $aggregateId;
 
     /**
      * CommandMessage constructor.
