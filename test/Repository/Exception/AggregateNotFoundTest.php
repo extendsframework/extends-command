@@ -14,7 +14,7 @@ class AggregateNotFoundTest extends TestCase
      *
      * @covers \ExtendsFramework\Command\Repository\Exception\AggregateNotFound::__construct()
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $exception = new AggregateNotFound('foo');
 

@@ -46,35 +46,3 @@ class AbstractCommandHandlerTest extends TestCase
         $this->assertSame($message, $handler->getCommandMessage());
     }
 }
-
-class HandlerStub extends AbstractCommandHandler
-{
-    /**
-     * @var PayloadInterface
-     */
-    protected $payload;
-
-    /**
-     * @param PayloadInterface $payload
-     */
-    public function handlePayloadStub(PayloadInterface $payload): void
-    {
-        $this->payload = $payload;
-    }
-
-    /**
-     * @return CommandMessageInterface
-     */
-    public function getCommandMessage(): CommandMessageInterface
-    {
-        return parent::getCommandMessage();
-    }
-
-    /**
-     * @return PayloadInterface
-     */
-    public function getPayload(): PayloadInterface
-    {
-        return $this->payload;
-    }
-}

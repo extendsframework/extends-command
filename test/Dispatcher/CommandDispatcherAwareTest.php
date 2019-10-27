@@ -35,29 +35,3 @@ class CommandDispatcherAwareTest extends TestCase
         $stub->execute('foo', $payload, ['foo' => 'bar']);
     }
 }
-
-class CommandDispatcherAwareStub
-{
-    use CommandDispatcherAware;
-
-    /**
-     * CommandDispatcherAwareStub constructor.
-     *
-     * @param CommandDispatcherInterface $commandDispatcher
-     */
-    public function __construct(CommandDispatcherInterface $commandDispatcher)
-    {
-        $this->commandDispatcher = $commandDispatcher;
-    }
-
-    /**
-     * @param string           $aggregateId
-     * @param PayloadInterface $payload
-     * @param array            $metaData
-     * @throws CommandDispatcherException
-     */
-    public function execute(string $aggregateId, PayloadInterface $payload, array $metaData): void
-    {
-        $this->dispatch($aggregateId, $payload, $metaData);
-    }
-}
