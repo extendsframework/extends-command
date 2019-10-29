@@ -19,9 +19,10 @@ class CommandDispatcherFactory implements ServiceFactoryInterface
     public function createService(string $key, ServiceLocatorInterface $serviceLocator, array $extra = null): object
     {
         $config = $serviceLocator->getConfig();
+        $config = $config[CommandDispatcherInterface::class] ?? [];
 
         $dispatcher = new CommandDispatcher();
-        foreach ($config[CommandDispatcherInterface::class] ?? [] as $name => $payloadNames) {
+        foreach ($config as $name => $payloadNames) {
             $handler = $this->getCommandHandler($serviceLocator, $name);
 
             foreach ((array)$payloadNames as $payloadName) {
