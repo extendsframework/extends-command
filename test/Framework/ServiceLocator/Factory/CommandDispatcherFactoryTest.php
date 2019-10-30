@@ -16,7 +16,6 @@ class CommandDispatcherFactoryTest extends TestCase
      * Test that command dispatcher will be created from config.
      *
      * @covers \ExtendsFramework\Command\Framework\ServiceLocator\Factory\CommandDispatcherFactory::createService()
-     * @covers \ExtendsFramework\Command\Framework\ServiceLocator\Factory\CommandDispatcherFactory::getCommandHandler()
      */
     public function testCreateService(): void
     {

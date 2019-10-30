@@ -15,7 +15,6 @@ class CommandDispatcherAwareTest extends TestCase
      * Test that dispatch method will proxy to the command dispatcher.
      *
      * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcherAware::dispatch()
-     * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcherAware::getCommandDispatcher()
      */
     public function testDispatch(): void
     {

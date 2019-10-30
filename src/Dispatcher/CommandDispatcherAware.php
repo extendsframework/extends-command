@@ -26,25 +26,13 @@ trait CommandDispatcherAware
      */
     private function dispatch(string $aggregateId, PayloadInterface $payload, array $metaData = null): void
     {
-        $this
-            ->getCommandDispatcher()
-            ->dispatch(
-                new CommandMessage(
-                    $payload,
-                    new PayloadType($payload),
-                    $aggregateId,
-                    $metaData
-                )
-            );
-    }
-
-    /**
-     * Get command dispatcher.
-     *
-     * @return CommandDispatcherInterface
-     */
-    private function getCommandDispatcher(): CommandDispatcherInterface
-    {
-        return $this->commandDispatcher;
+        $this->commandDispatcher->dispatch(
+            new CommandMessage(
+                $payload,
+                new PayloadType($payload),
+                $aggregateId,
+                $metaData
+            )
+        );
     }
 }

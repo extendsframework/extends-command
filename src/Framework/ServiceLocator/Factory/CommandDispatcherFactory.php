@@ -22,8 +22,9 @@ class CommandDispatcherFactory implements ServiceFactoryInterface
         $config = $config[CommandDispatcherInterface::class] ?? [];
 
         $dispatcher = new CommandDispatcher();
-        foreach ($config as $name => $payloadNames) {
-            $handler = $this->getCommandHandler($serviceLocator, $name);
+        foreach ($config as $commandKey => $payloadNames) {
+            /** @var CommandHandlerInterface $handler */
+            $handler = $serviceLocator->getService($commandKey);
 
             foreach ((array)$payloadNames as $payloadName) {
                 $dispatcher->addCommandHandler($handler, $payloadName);
@@ -31,18 +32,5 @@ class CommandDispatcherFactory implements ServiceFactoryInterface
         }
 
         return $dispatcher;
-    }
-
-    /**
-     * Get command handler from service locator for key.
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param string                  $key
-     * @return CommandHandlerInterface
-     * @throws ServiceLocatorException
-     */
-    private function getCommandHandler(ServiceLocatorInterface $serviceLocator, string $key): object
-    {
-        return $serviceLocator->getService($key);
     }
 }

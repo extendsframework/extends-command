@@ -21,9 +21,14 @@ class CommandDispatcher implements CommandDispatcherInterface
      */
     public function dispatch(CommandMessageInterface $commandMessage): void
     {
-        $this
-            ->getCommandHandler($commandMessage)
-            ->handle($commandMessage);
+        $name = $commandMessage
+            ->getPayloadType()
+            ->getName();
+        if (!array_key_exists($name, $this->commandHandlers)) {
+            throw new CommandHandlerNotFound($commandMessage);
+        }
+
+        $this->commandHandlers[$name]->handle($commandMessage);
     }
 
     /**
@@ -38,37 +43,5 @@ class CommandDispatcher implements CommandDispatcherInterface
         $this->commandHandlers[$payloadName] = $commandHandler;
 
         return $this;
-    }
-
-    /**
-     * Get command handler for command message.
-     *
-     * An exception will be thrown when command handler for command message payload name can not be found.
-     *
-     * @param CommandMessageInterface $commandMessage
-     * @return CommandHandlerInterface
-     * @throws CommandDispatcherException
-     */
-    private function getCommandHandler(CommandMessageInterface $commandMessage): CommandHandlerInterface
-    {
-        $name = $commandMessage
-            ->getPayloadType()
-            ->getName();
-        $commandHandlers = $this->getCommandHandlers();
-        if (!array_key_exists($name, $commandHandlers)) {
-            throw new CommandHandlerNotFound($commandMessage);
-        }
-
-        return $commandHandlers[$name];
-    }
-
-    /**
-     * Get command handlers.
-     *
-     * @return CommandHandlerInterface[]
-     */
-    private function getCommandHandlers(): array
-    {
-        return $this->commandHandlers;
     }
 }

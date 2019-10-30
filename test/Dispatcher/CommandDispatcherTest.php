@@ -18,8 +18,6 @@ class CommandDispatcherTest extends TestCase
      *
      * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcher::addCommandHandler()
      * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcher::dispatch()
-     * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcher::getCommandHandler()
-     * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcher::getCommandHandlers()
      */
     public function testDispatch(): void
     {
@@ -57,8 +55,6 @@ class CommandDispatcherTest extends TestCase
      *
      * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcher::addCommandHandler()
      * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcher::dispatch()
-     * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcher::getCommandHandler()
-     * @covers \ExtendsFramework\Command\Dispatcher\CommandDispatcher::getCommandHandlers()
      * @covers \ExtendsFramework\Command\Dispatcher\Exception\CommandHandlerNotFound::__construct()
      */
     public function testCommandHandlerNotFound(): void
