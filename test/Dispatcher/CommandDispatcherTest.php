@@ -37,6 +37,10 @@ class CommandDispatcherTest extends TestCase
             ->method('handle')
             ->with($message);
 
+        /**
+         * @var CommandHandlerInterface $handler
+         * @var CommandMessageInterface $message
+         */
         $dispatcher = new CommandDispatcher();
         $dispatcher
             ->addCommandHandler($handler, 'PayloadFoo')
@@ -73,6 +77,10 @@ class CommandDispatcherTest extends TestCase
             ->expects($this->never())
             ->method('handle');
 
+        /**
+         * @var CommandHandlerInterface $handler
+         * @var CommandMessageInterface $message
+         */
         $dispatcher = new CommandDispatcher();
         $dispatcher
             ->addCommandHandler($handler, 'PayloadFoo')

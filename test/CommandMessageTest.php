@@ -22,6 +22,10 @@ class CommandMessageTest extends TestCase
         $payload = $this->createMock(PayloadInterface::class);
         $payloadType = $this->createMock(PayloadTypeInterface::class);
 
+        /**
+         * @var PayloadInterface     $payload
+         * @var PayloadTypeInterface $payloadType
+         */
         $message = new CommandMessage($payload, $payloadType, 'id', ['foo' => 'bar']);
 
         $this->assertSame('id', $message->getAggregateId());

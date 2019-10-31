@@ -26,6 +26,10 @@ class CommandDispatcherAwareTest extends TestCase
 
         $payload = $this->createMock(PayloadInterface::class);
 
+        /**
+         * @var CommandDispatcherInterface $commandDispatcher
+         * @var PayloadInterface           $payload
+         */
         $stub = new CommandDispatcherAwareStub($commandDispatcher);
         $stub->execute('foo', $payload, ['foo' => 'bar']);
     }

@@ -42,6 +42,9 @@ class CommandDispatcherFactoryTest extends TestCase
             )
             ->willReturn($handler);
 
+        /**
+         * @var ServiceLocatorInterface $serviceLocator
+         */
         $factory = new CommandDispatcherFactory();
         $dispatcher = $factory->createService(CommandDispatcherInterface::class, $serviceLocator);
 
