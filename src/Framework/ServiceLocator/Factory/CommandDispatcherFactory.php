@@ -21,11 +21,12 @@ class CommandDispatcherFactory implements ServiceFactoryInterface
         $config = $config[CommandDispatcherInterface::class] ?? [];
 
         $dispatcher = new CommandDispatcher();
-        foreach ($config as $command => $payloadNames) {
+        foreach ($config as $commandKey => $payloadNames) {
+            $command = $serviceLocator->getService($commandKey);
             foreach ((array)$payloadNames as $payloadName) {
                 /** @noinspection PhpParamsInspection */
                 $dispatcher->addCommandHandler(
-                    $serviceLocator->getService($command),
+                    $command,
                     $payloadName
                 );
             }
