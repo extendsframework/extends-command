@@ -5,7 +5,6 @@ namespace ExtendsFramework\Command\Framework\ServiceLocator\Factory;
 
 use ExtendsFramework\Command\Dispatcher\CommandDispatcher;
 use ExtendsFramework\Command\Dispatcher\CommandDispatcherInterface;
-use ExtendsFramework\Command\Handler\CommandHandlerInterface;
 use ExtendsFramework\ServiceLocator\Resolver\Factory\ServiceFactoryInterface;
 use ExtendsFramework\ServiceLocator\ServiceLocatorException;
 use ExtendsFramework\ServiceLocator\ServiceLocatorInterface;
@@ -22,12 +21,13 @@ class CommandDispatcherFactory implements ServiceFactoryInterface
         $config = $config[CommandDispatcherInterface::class] ?? [];
 
         $dispatcher = new CommandDispatcher();
-        foreach ($config as $commandKey => $payloadNames) {
-            /** @var CommandHandlerInterface $handler */
-            $handler = $serviceLocator->getService($commandKey);
-
+        foreach ($config as $command => $payloadNames) {
             foreach ((array)$payloadNames as $payloadName) {
-                $dispatcher->addCommandHandler($handler, $payloadName);
+                /** @noinspection PhpParamsInspection */
+                $dispatcher->addCommandHandler(
+                    $serviceLocator->getService($command),
+                    $payloadName
+                );
             }
         }
 

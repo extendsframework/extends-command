@@ -36,9 +36,6 @@ class AbstractCommandHandlerTest extends TestCase
             ->method('getPayloadType')
             ->willReturn($payloadType);
 
-        /**
-         * @var CommandMessageInterface $message
-         */
         $handler = new HandlerStub();
         $handler->handle($message);
 
