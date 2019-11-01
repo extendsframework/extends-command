@@ -24,7 +24,7 @@ class CommandDispatcher implements CommandDispatcherInterface
         $name = $commandMessage
             ->getPayloadType()
             ->getName();
-        if (!array_key_exists($name, $this->commandHandlers)) {
+        if (!isset($this->commandHandlers[$name])) {
             throw new CommandHandlerNotFound($commandMessage);
         }
 
